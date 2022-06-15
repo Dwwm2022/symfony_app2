@@ -15,4 +15,16 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/person', name: 'app_person')]
+    public function getData(): Response
+    {
+        $data = [
+            ["id"=>1, "name"=>"Dupond", "lastname"=>"Roger","age"=>22, "image"=>"dupond.jpg"],
+            ["id"=>2, "name"=>"Durand", "lastname"=>"Simon","age"=>52, "image"=>"simon.jpg"],
+        ];
+        return $this->render('home/data.html.twig', [
+            'personnes' => $data,
+        ]);
+    }
 }
