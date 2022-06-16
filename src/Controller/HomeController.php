@@ -17,20 +17,6 @@ class HomeController extends AbstractController
             ["id" => 2, "name" => "Durand", "lastname" => "Thomas", "age" => 52, "image" => "thomas.jpeg"],
         ];
     }
-
-    #[Route('/log', name: 'app_log')]
-    public function indexLogger(LoggerInterface $logger)
-    {
-        $logger->info('I just got the logger');
-        $logger->error('Erreur grave');
-
-        $logger->critical('Erreur critique', [
-            // include extra "context" info in your logs
-            'cause' => 'Erreur critique',
-        ]);
-
-        return new Response("<html><head></head><body>test</body></html>");
-    }
     
     #[Route('/home', name: 'app_home')]
     public function index(): Response
