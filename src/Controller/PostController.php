@@ -26,15 +26,23 @@ class PostController extends AbstractController
         $manager = $doctrine->getManager();
 
         $post = new Post();
-        $post->setReference("52356totot25")
-             ->setTitle("La guerre en Ukraine")
+        $post->setReference("52356totot27")
+             ->setTitle("Présidence")
              ->setContent("survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-             ->setAuthor("Michel Gregoire")
+             ->setAuthor("Antonin")
              ->setPublishedAt(new DateTimeImmutable())
-             ->setImage("ukraine.jpg");
+             ->setImage("election.jpg");
 
         $manager->persist($post);
         $manager->flush();
         return new Response('Article inséré');
+    }
+
+    #[Route('/list', name:"list_posts")]
+    public function getPosts(ManagerRegistry $doctrine){
+        $manager = $doctrine->getRepository(Post::class);
+        $tab_posts = $manager->findAll();
+        //dd($tab_posts);
+        return $this->render('post/list.html.twig', ['posts'=> $tab_posts]);
     }
 }

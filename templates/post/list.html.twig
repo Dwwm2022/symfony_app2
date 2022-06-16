@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+ 
+{% endblock %}
+{% block title %}Liste des articles{% endblock %}
+    {% block body %}
+    <div class="container">
+        <h1>Liste des articles</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Référence</th>
+                    <th>Titre</th>
+                    <th>Autheur</th>
+                    <th>Contenu</th>
+                    <th>Image</th>
+                    <th>Paru le</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for post in posts  %}
+                
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.reference }}</td>
+                    <td>{{ post.title|capitalize }}</td>
+                    <td>{{ post.author|upper }}</td>
+                    <td>{{ post.content|capitalize }}</td>
+                    <td><img src="images/{{ asset(post.image) }}" width="60"/></td> 
+                    <td>{{ post.publishedAt|date("d/m/Y") }}</td>
+                    {# <td><img src="{{ asset('images/'~person.image) }}"  class="rounded" width="60"/></td> #}
+                    {# <td><a href="/item/{{ person.id }}">Afiicher</a></td> #}
+                    {# <td><a href="{{ path('person_item', {id:person.id}) }}">Afficher</a></td> #}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     {% endblock %}
