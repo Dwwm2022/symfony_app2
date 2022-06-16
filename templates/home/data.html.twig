@@ -5,6 +5,7 @@
 {% block title %}Donnees de personne{% endblock %}
     {% block body %}
     <div class="container">
+        {% include 'home/banner.html.twig' %}
         <h1>Liste des personnes</h1>
         <table class="table table-striped">
             <thead>
@@ -22,8 +23,8 @@
                 
                 <tr>
                     <td>{{ person.id }}</td>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.lastname }}</td>
+                    <td>{{ person.name|capitalize }}</td>
+                    <td>{{ person.lastname|upper }}</td>
                     <td>{{ person.age }}</td>
                     <td><img src="images/{{ asset(person.image) }}" width="60"/></td> 
                     {# <td><img src="{{ asset('images/'~person.image) }}"  class="rounded" width="60"/></td> #}

@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Psr\Log\LoggerInterface;
 
 class HomeController extends AbstractController
 {
@@ -13,8 +12,8 @@ class HomeController extends AbstractController
     public function __construct()
     {
         $this->data =  [
-            ["id" => 1, "name" => "Dupond", "lastname" => "Roger", "age" => 22, "image" => "roger.jpg"],
-            ["id" => 2, "name" => "Durand", "lastname" => "Thomas", "age" => 52, "image" => "thomas.jpeg"],
+            ["id" => 1, "name" => "dupond", "lastname" => "roger", "age" => 22, "image" => "roger.jpg"],
+            ["id" => 2, "name" => "durand", "lastname" => "thomas", "age" => 52, "image" => "thomas.jpeg"],
         ];
     }
     
