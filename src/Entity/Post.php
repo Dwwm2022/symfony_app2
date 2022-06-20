@@ -31,6 +31,9 @@ class Post
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $image;
 
+    #[ORM\ManyToOne(targetEntity: Theme::class, inversedBy: 'posts')]
+    private $theme;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Post
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

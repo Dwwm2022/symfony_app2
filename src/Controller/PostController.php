@@ -28,12 +28,12 @@ class PostController extends AbstractController
         $manager = $doctrine->getManager();
 
         $post = new Post();
-        $post->setReference("52356totot29")
-             ->setTitle("Genie en ifo")
+        $post->setReference("52356totot30")
+             ->setTitle("Election législative")
              ->setContent("survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
-             ->setAuthor("Thomas")
-             ->setPublishedAt(new DateTimeImmutable())
-             ->setImage("roger.jpg");
+             ->setAuthor("Anoine")
+             ->setPublishedAt(new \DateTimeImmutable())
+             ->setImage("election.jpg");
         $manager->persist($post);
         $manager->flush();
         $this->addFlash('success', "Article N°: ".$post->getId()." est créé");
@@ -42,9 +42,11 @@ class PostController extends AbstractController
 
     #[Route('/list', name:"list_posts")]
     public function getPosts(ManagerRegistry $doctrine, Request $request){
-        dd($request->request->get('search'));
+        $search = $request->request->get('search');
+        //dd($search);
         $repo = $doctrine->getRepository(Post::class);
-        $tab_posts = $repo->findAll();
+        $tab_posts = ($search) ? $repo->findSearch($search) : $repo->findBy([],['id'=>'DESC']);
+        //$tab_posts = $repo->findAll();
         //dd($tab_posts);
         return $this->render('post/list.html.twig', ['posts'=> $tab_posts]);
     }
