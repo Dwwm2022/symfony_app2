@@ -5,7 +5,7 @@
 {% block title %}Liste des articles{% endblock %}
     {% block body %}
         
-        <h1>Liste des articles</h1>
+        <h1>Liste des articles par Thème</h1>
         {% include "post/search.html.twig" %}
         <table class="table table-striped text-center">
             <thead>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for post in posts  %}
+            {% for post in theme.posts  %}
                 
                 <tr>
                     <td>{{ post.id }}</td>
@@ -32,13 +32,7 @@
                     <td>{{ post.content|capitalize }}</td>
                     {# <td><img src="images/{{ asset(post.image) }}" width="60"/></td>  #}
                     <td><img src="{{ asset('images/'~post.image) }}"  class="rounded" width="60"/></td> 
-                    <td>
-                    {% if post.theme %}
-                    <a href="{{ path('show_theme_id', {id: post.theme.id}) }}">{{ post.theme.name }}</a>
-                    {% else %}
-                    {{'Theme inconu.'}}
-                    {% endif %}
-                    </td>
+                    <td><a href="{{ path('show_theme_id', {id: post.theme.id}) }}">{{ post.theme.name }}</a></td>
                     <td>{{ post.publishedAt|date("d/m/Y") }}</td>
                     <td>
                         <a href="{{ path('show_post', { id: post.id})}}" class="btn btn-primary">
@@ -47,7 +41,6 @@
                         </a>
                     </td>
                     <td>
-                    
                         <a href="{{ path('update_post', { id: post.id})}}" class="btn btn-warning">
                         <i class="fas fa-refresh"></i>
                         Update
