@@ -42,7 +42,7 @@ class PostController extends AbstractController
 
     #[Route('/list', name:"list_posts")]
     public function getPosts(ManagerRegistry $doctrine, Request $request){
-        dd($request->request->get('search'));
+        //dd($request->request->get('search'));
         $repo = $doctrine->getRepository(Post::class);
         $tab_posts = $repo->findAll();
         //dd($tab_posts);

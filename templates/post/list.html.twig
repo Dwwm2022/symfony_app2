@@ -30,12 +30,12 @@
                     <td>{{ post.author|upper }}</td>
                     <td>{{ post.content|capitalize }}</td>
                     {# <td><img src="images/{{ asset(post.image) }}" width="60"/></td>  #}
-                    <td><img src="{{ asset('images/'~post.image) }}"  class="rounded" width="60"/></td> 
+                    <td><img src="{{ asset('images/'~post.image) }}"  class="rounded" width="100"/></td> 
                     <td>{{ post.publishedAt|date("d/m/Y") }}</td>
                     <td>
                         <a href="{{ path('show_post', { id: post.id})}}" class="btn btn-primary">
                         <i class="fas fa-eye"></i>
-                        Afficher
+                        Show
                         </a>
                     </td>
                     <td>
