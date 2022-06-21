@@ -4,8 +4,9 @@
 {% endblock %}
 {% block title %}Liste des articles{% endblock %}
     {% block body %}
-        
+        {% include '_menu.html.twig' %}
         <h1>Liste des articles</h1>
+        <a class="btn btn-warning" href="{{path('create_post')}}"><i class="fas fa-plus-square"></i></a>
         {% include "post/search.html.twig" %}
         <table class="table table-striped text-center">
             <thead>

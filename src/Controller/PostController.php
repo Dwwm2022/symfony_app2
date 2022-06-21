@@ -87,7 +87,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/update/{id}', name:"update_post")]
-    public function updatePost(PostRepository $repo, $id, ManagerRegistry $doctrine){
+    public function updatePost(PostRepository $repo, $id, ManagerRegistry $doctrine, Request $request){
         $post = $repo->find($id);
         $form = $this->createForm(PostType::class, $post);
         $form->remove('publishedAt');
@@ -97,6 +97,13 @@ class PostController extends AbstractController
         // $manager->flush();
         //$this->addFlash('success','L\'article '.$post->getTitle().' a été modifié');
         //return $this->redirectToRoute('list_posts');
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager = $doctrine->getManager();
+            $manager->flush();
+        $this->addFlash('success','L\'article '.$post->getTitle().' a été modifié');
+        return $this->redirectToRoute('list_posts');
+        }
         return $this->renderForm('post/edit.html.twig', ['form_edit'=>$form]);
     }
 

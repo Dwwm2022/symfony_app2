@@ -4,7 +4,7 @@
 {% endblock %}
 {% block title %}Edition d'un article{% endblock %}
     {% block body %}
-    {{ form_start(form_edit) }}
+    {{ form_start(form_edit, {'attr':{'novalidate':'novalidate'}}) }}
     {{ form_widget(form_edit) }}
     <button type="submit" class="btn btn-warning col-12">Modifier</button>
     {{ form_end(form_edit) }}
