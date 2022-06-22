@@ -4,7 +4,6 @@
 {% endblock %}
 {% block title %}Liste des articles{% endblock %}
     {% block body %}
-        {% include '_menu.html.twig' %}
         <h1>Liste des articles</h1>
         <a class="btn btn-warning" href="{{path('create_post')}}"><i class="fas fa-plus-square"></i></a>
         {% include "post/search.html.twig" %}
@@ -47,6 +46,7 @@
                         Show
                         </a>
                     </td>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>
                     
                         <a href="{{ path('update_post', { id: post.id})}}" class="btn btn-warning">
@@ -61,6 +61,7 @@
                         <i class="fas fa-trash"></i> Delete
                         </a>
                     </td>
+                    {% endif %}
                     {# <td><a href="/item/{{ person.id }}">Afiicher</a></td> #}
                     {# <td><a href="{{ path('person_item', {id:person.id}) }}">Afficher</a></td> #}
                 </tr>

@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+#[Route('admin')]
 class PostController extends AbstractController
 {
     #[Route('/post2', name: 'app_post')]
@@ -28,9 +29,11 @@ class PostController extends AbstractController
     }
 
     /**
+     * 
      * @Route("/post", name="create_post")
      */
     public function createPost(ManagerRegistry $doctrine, Request $request){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Accès interdit aux non-administrateurs');
         $manager = $doctrine->getManager();
 
         $post = new Post();
@@ -65,12 +68,9 @@ class PostController extends AbstractController
 
     #[Route('/list', name:"list_posts")]
     public function getPosts(ManagerRegistry $doctrine, Request $request){
-<<<<<<< HEAD
         //dd($request->request->get('search'));
-=======
         $search = $request->request->get('search');
         //dd($search);
->>>>>>> f996ca9a101138d5ca368ea6c611d3c238ffdeb8
         $repo = $doctrine->getRepository(Post::class);
         $tab_posts = ($search) ? $repo->findSearch($search) : $repo->findBy([],['id'=>'DESC']);
         //$tab_posts = $repo->findAll();
