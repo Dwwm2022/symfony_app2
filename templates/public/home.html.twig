@@ -1,0 +1,63 @@
+{% extends 'base_public.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	{% include "navbar.html.twig" %}
+	{% include "public/banner.html.twig" %}
+	<div class="row">
+		<div class="col-8">
+			<div class="row">
+				{% for post in posts %}
+					<div class="card col-6">
+						<img src="{{ asset('images/'~post.image)}}" class="card-img-top" alt="Fissure in Sandstone"/>
+						<div class="card-body">
+							<h5 class="card-title">{{post.title}}</h5>
+							<p class="card-text">{{post.content}}...</p>
+							<a href="#!" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Lire plus!</a>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+									<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">...</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-4">
+			<form action="{{path('app_public_home')}}" method="post">
+				<div class="row">
+					<div class="col-9">
+						<input placeholder="Rechercher..." type="search" name="search" id="search" class="form-control">
+					</div>
+					<div class="col-2">
+						<button type="submit" class="btn btn-secondary">
+							<i class="fas fa-search"></i>
+							</button>
+					</div>
+				</div>
+			</form>
+			<div class="card">
+				<ul class="list-group list-group-light text-center">
+                {% for theme in themes %}
+					<li class="list-group-item px-3">
+                        <a href="{{ path('app_public_theme_posts',{id:theme.id}) }}" class="btn btn-primary">{{theme.name}}</a>
+                    </li>
+                {% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}

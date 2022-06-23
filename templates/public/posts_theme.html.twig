@@ -1,0 +1,19 @@
+{% extends 'base_public.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+{% include "navbar.html.twig" %}
+<div class="row">
+	{% for post in posts %}
+		<div class="card col-6">
+			<img src="{{ asset('images/'~post.image)}}" class="card-img-top" alt="Fissure in Sandstone"/>
+			<div class="card-body">
+				<h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.author}}</p>
+				<p class="card-text">{{post.content}}...</p>
+			</div>
+		</div>
+		
+	{% endfor %}
+</div> {% endblock %}
